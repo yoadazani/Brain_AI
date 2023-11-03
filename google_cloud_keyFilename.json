@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gmail-api-tutorial-350113",
+  "private_key_id": "ec41f58bb76521bb699d92abaabf2a4a3cd005da",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDXeaUisNcTk417\nyM96Lbg9PiIJVr3rtcd62kI6DcQ7vA1pbXqQr98QaNLq9G3AKwaR2yZVojTINBWi\nS1KhiYRj8MsJVLIb886rD3725g23GIQo+rGqECxasAIosbNFtgffVpYU5uSma3tY\njrB1iqry8VFdYzct0HTQ4gw5MbBY/NLmSnEgZKIsodMYL+aX77fYKucQcGi9M2BT\n53RHch2PFOQz2qlKvz383UV5eau0fGsx89mW6+S0w/OKvU02HjjGsRieXlRNUtWu\nTpHrcRdQZwe/j2sMZHf7SyYDLSOZfmhLpkQAMF+QfY7dqKWYRRqyeTQdA6+5L6Mh\nEXpWYyAzAgMBAAECggEATXisGePxAFXd2bKifjAv/Lz5KdhpInVSCmasxwiqFDwR\nqmU1Ww4Qqmq14soNJ7mQfCKKDuHqDk1Dtf1U8UVrNy+dIHa2Lvyiwrgokwa1ya3j\n3oP8GsQD3ntH22/AoADJpdAQ1+UIMpmUWIu9ABXiTsTa1zPT5AH97hhIAsxNtkBO\n/vLSXGJnYoaK12bHeBbvSiztIe6/X68z2W0r5Y7Tb9hCrmPclRmWegXVSEHUCf71\ntADHsI0Bq5DvfV5Ug2VN0/WwMoVymzfuUXmtqapfcUheJXa+Wfu2yOFYvjuGS0OU\nRPuU9AbwE0qlJvtU9OTW4p1JWKi8maPT5sjLB6UbSQKBgQD+Cc47zBu+KzsAFLGh\nO/olyyt9wlTZ6VKw87nPcudAydgp7U9J7jLVx70P7aZkg5QRY13uEFfvjR76mTlo\nheLXgB4P9WmJzpde6aifdtZT3KuObOHCOD4N5J14SziewBSoNzdd7vM8Ag1+aWYi\n7NoXeMKmBMVRlN+G5NPJPGrWlwKBgQDZI5srM4fldksjN0cMUnLNJwQMEUzmryCx\nXjCbOp4Jy+aDHs6c9q5fwlmXk1TbDD1vFH5N0Cqc9ik0G66oQJGWWIniXEG7YBPl\nItfpUJEPcSuczud16OlQpfrJuI+HHIN4vMp8r59f36GRpdnXtBnYrNedurMPd81I\n+sDOdqGyxQKBgCIZdNpn+m1bZi8LmBBZealrDSpzVGpvvE7OWGm1Nb9nmKGAHj2B\nQMebaRBjSQuC8fQnj2suPG+GVNs0iBU0q49bvi1MNt9toLn3yU+mZvyYyVpz2RX1\n8LZysoR8LFx60gsGZmMweOvcJq2KPlB/1IKEDjS0vTvHLP3xZ1BC0OB/AoGAKJIL\niv3c1VXN4i2Q28+H3ab9jZep66wrCpjTsh04rBHp5vPZnOBGYmP4w2Zmw2q9C8Uj\neDx9ycgAmNjXQF6YFSRD1wRvz6e67+QbvV8tS1pU0L6j5pb3CPeKLSiLwK3mLqfv\nmW5i89Hf6Uu4sSHYdnCM9M6OaER1Gb6oSatGuRUCgYAitJGd9GAWb6fajlojYkBC\nP2vKRJVKa+kQ6GEIc1YyK00i+DU6Puhh0EdGPY0uBFiFlKu+UdIRega0pxMwOAIJ\ndq0xqVWiPuOAZSIL6RN3wdOp4QDwDk2fxn6unrvgXpW97ApY6IewYlJi7udVAAoo\n36BQbJlH9wPVOjZdxvcbFQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "brain-40@gmail-api-tutorial-350113.iam.gserviceaccount.com",
+  "client_id": "100888865080803486159",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/brain-40%40gmail-api-tutorial-350113.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
