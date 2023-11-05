@@ -12,7 +12,7 @@ const SideBar = () => {
     return (
         <>
             <div className="h-full relative bg-gray-900">
-                <Logo/>
+                <Logo color="text-white"/>
 
                 <div className="flex flex-col mt-6">
                     {sideBarLinks.map((link) => {

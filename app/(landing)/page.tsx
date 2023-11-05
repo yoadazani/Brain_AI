@@ -1,8 +1,6 @@
 "use client"
 
 import {useRouter} from "next/navigation";
-
-import {Button} from "@/components/ui/button";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 const ICON = "https://seeklogo.com/images/B/brain-logo-085FB58CDA-seeklogo.com.png";
@@ -16,12 +14,11 @@ export default function Home() {
 
     return (
         <main className="h-screen bg-gray-900">
-            <div className="flex justify-end items-center space-x-4 py-2 px-4">
-                <Button onClick={handleNavigate} variant="ghost" size="sm" className="text-sm text-zinc-100 hover:bg-transparent hover:text-zinc-100">
-                    <span>
-                        Go to dashboard
-                    </span>
-                </Button>
+            <div className="flex justify-end items-center space-x-8 py-2 px-4">
+                <ul className="flex space-x-4">
+                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/login")}>sign in</li>
+                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/register")}>sign up</li>
+                </ul>
                 <Avatar className="h-8 w-8">
                     <AvatarImage src={ICON}/>
                     <AvatarFallback>AI</AvatarFallback>
