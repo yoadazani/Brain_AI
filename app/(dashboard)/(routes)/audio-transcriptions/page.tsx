@@ -1,18 +1,18 @@
 "use client"
 
 import React, {FormEvent, useState} from "react";
-import {BiMusic} from "react-icons/bi";
-import Empty from "@/components/Empty";
+import {Music} from "lucide-react";
+import Empty from "@/components/app/Empty";
 import {AiOutlineClear, AiOutlineSend} from "react-icons/ai";
 import {toast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import Loader from "@/components/Loader";
+import Loader from "@/components/app/Loader";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {WaveSurferAudio} from "@/components/WaveSurferAudio";
-import {SelectLang} from "@/components/SelectLang";
+import {WaveSurferAudio} from "@/components/pages/audio-transcriptions/WaveSurferAudio";
+import {SelectLang} from "@/components/pages/audio-transcriptions/SelectLang";
 import axios from "axios";
 
 const MusicGenerator = () => {
@@ -63,7 +63,7 @@ const MusicGenerator = () => {
     return (
         <div className="grid row-span-full h-screen overflow-hidden pb-1 px-4 md:px-8 lg:px-16 relative">
             <div className="flex items-center space-x-4">
-                <BiMusic className="text-4xl text-emerald-500"/>
+                <Music className="text-4xl text-emerald-500"/>
                 <div className="flex flex-col">
                     <h1 className="font-bold text-2xl text-zinc-700">Audio Transcription</h1>
                     <span className="text-zinc-400 text-sm">Turn your prompt into an music.</span>

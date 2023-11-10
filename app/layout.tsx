@@ -2,7 +2,7 @@ import './globals.css'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import {ReactNode} from "react";
-import CrispChat from "@/components/CrispChat";
+import CrispChat from "@/components/app/CrispChat";
 import {Toaster} from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ['latin'], fallback: ['system-ui', 'arial'] })

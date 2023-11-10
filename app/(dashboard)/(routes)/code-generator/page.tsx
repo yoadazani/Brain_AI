@@ -2,13 +2,13 @@
 
 import React, {useState} from 'react';
 
-import Loader from "@/components/Loader";
-import Empty from "@/components/Empty";
+import Loader from "@/components/app/Loader";
+import Empty from "@/components/app/Empty";
 import {Textarea} from "@/components/ui/textarea";
 import {useToast} from "@/components/ui/use-toast";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
-import {BsCodeSlash} from 'react-icons/bs';
+import {Code} from "lucide-react";
 import {AiOutlineSend} from "react-icons/ai";
 
 import {cn} from "@/lib/utils";
@@ -50,7 +50,7 @@ const Conversation = () => {
     return (
         <div className="grid row-span-full h-screen overflow-hidden pb-1 px-4 md:px-8 lg:px-16 relative">
             <div className="flex items-center space-x-4">
-                <BsCodeSlash className="text-4xl text-green-700"/>
+                <Code className="text-4xl text-green-700"/>
                 <div className="flex flex-col">
                     <h1 className="font-bold text-2xl text-zinc-700">code generator</h1>
                     <span className="text-zinc-400 text-sm">Generate code using descriptive text</span>

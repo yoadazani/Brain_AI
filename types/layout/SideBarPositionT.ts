@@ -1,0 +1,1 @@
+export type SideBarPositionT = "left" | "right" | "top" | "bottom" | undefined | null

@@ -2,8 +2,8 @@
 
 import {ReactNode} from "react";
 
-import SideBar from "@/components/SideBar";
-import NavBar from "@/components/NavBar";
+import SideBar from "@/components/layout/SideBar";
+import NavBar from "@/components/layout/NavBar";
 
 
 const DashboardLayout = ({children}: { children: ReactNode }) => {

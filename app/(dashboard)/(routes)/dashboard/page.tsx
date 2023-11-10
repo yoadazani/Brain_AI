@@ -10,7 +10,6 @@ import {cn} from "@/lib/utils";
 
 export default function Home() {
     const router = useRouter()
-    const pathname = usePathname()
     return (
         <>
             <div className="flex flex-col justify-center items-center space-y-2 lg:space-y-4 mb-3 lg:mb-5">
@@ -23,7 +22,7 @@ export default function Home() {
                           onClick={() => router.push(link.href)}>
                         <div className="flex flex-row items-center space-x-4">
                             <div className="w-fit rounded-md">
-                                <link.icon className={cn("text-2xl text-blue-700")}/>
+                                <link.icon className={cn("text-2xl text-blue-700", link.color)}/>
                             </div>
                             <div>
                                 <span className="font-semibold text-lg text-zinc-700">{link.name}</span>

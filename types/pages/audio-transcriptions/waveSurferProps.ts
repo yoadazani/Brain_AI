@@ -1,0 +1,1 @@
+export type waveSurferProps = { url: string }

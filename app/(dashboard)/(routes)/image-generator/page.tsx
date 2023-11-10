@@ -3,12 +3,12 @@
 import dynamic from "next/dynamic";
 import axios from "axios";
 import React, {useState} from "react";
-import Loader from "@/components/Loader";
+import Loader from "@/components/app/Loader";
 import {AiOutlineSend} from "react-icons/ai";
-import SizeOptions from "@/components/pagesComponents/image-generator/SizeOptions";
-import AmountOptions from "@/components/pagesComponents/image-generator/AmountOptions";
-import {FiImage} from "react-icons/fi";
-import Empty from "@/components/Empty";
+import SizeOptions from "@/components/pages/image-generator/SizeOptions";
+import AmountOptions from "@/components/pages/image-generator/AmountOptions";
+import {Image as ImageIcon} from "lucide-react";
+import Empty from "@/components/app/Empty";
 import {IUserData} from "@/interfaces/IUserData";
 import {IAssistantData} from "@/interfaces/IAssistantData";
 import {cn} from "@/lib/utils";
@@ -17,7 +17,7 @@ import Image from "next/image";
 import {toast} from "@/components/ui/use-toast";
 import {Textarea} from "@/components/ui/textarea";
 
-const Download = dynamic(() => import('@/components/pagesComponents/image-generator/Download').then(module => module.Download))
+const Download = dynamic(() => import('@/components/pages/image-generator/Download').then(module => module.Download))
 const ImageGenerator = () => {
     const [loading, setLoading] = useState(false)
     const [messages, setMessages] = useState<Array<IUserData | IAssistantData>>([])
@@ -47,7 +47,7 @@ const ImageGenerator = () => {
     return (
         <div className="grid row-span-full h-screen overflow-hidden pb-1 px-4 md:px-8 lg:px-16 relative">
             <div className="flex items-center space-x-4">
-                <FiImage className="text-4xl text-pink-700"/>
+                <ImageIcon className="text-4xl text-pink-700"/>
                 <div className="flex flex-col">
                     <h1 className="font-bold text-2xl text-zinc-700">Image Generator</h1>
                     <span className="text-zinc-400 text-sm">Turn your prompt into an image.</span>

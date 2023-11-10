@@ -1,15 +1,15 @@
 "use client";
 
 import React, {useState} from 'react';
-import {BiConversation} from 'react-icons/bi';
+import {MessageSquare} from "lucide-react";
 import {Textarea} from "@/components/ui/textarea";
 import axios from "axios";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {useToast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
 import {AiOutlineSend} from "react-icons/ai";
-import Empty from "@/components/Empty";
-import Loader from "@/components/Loader";
+import Empty from "@/components/app/Empty";
+import Loader from "@/components/app/Loader";
 import ReactMarkDown from "react-markdown";
 import {IMessage} from "@/interfaces/IMessage";
 
@@ -46,7 +46,7 @@ const Conversation = () => {
     return (
         <div className="grid row-span-full h-screen overflow-hidden pb-1 px-4 md:px-8 lg:px-16 relative">
             <div className="flex items-center space-x-4">
-                <BiConversation className="text-4xl text-violet-500"/>
+                <MessageSquare className="text-4xl text-violet-500"/>
                 <div className="flex flex-col">
                     <h1 className="font-bold text-2xl text-zinc-700">conversation</h1>
                     <span className="text-zinc-400 text-sm">Our most advanced conversation model</span>

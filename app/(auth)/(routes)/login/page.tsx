@@ -1,16 +1,22 @@
 "use client"
 
-import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {useForm} from "react-hook-form";
+import {KeyRound, MailOpen} from "lucide-react"
+
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import * as z from "zod"
 
-import {loginSchema} from "./constants"
+import {loginSchema} from "@/constants/auth/loginConstant"
+
+import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useRouter} from "next/navigation";
+import axios from "axios";
 
 const Login = () => {
 
+    const router = useRouter()
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -20,9 +26,18 @@ const Login = () => {
     })
 
     const isLoading = form.formState.isSubmitting
-    const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         console.log(data)
-        form.reset()
+        try {
+            const res = await axios.post('/api/login', data)
+
+            console.log(res.data)
+        } catch (error: any) {
+            alert(error.response.data)
+        } finally {
+            form.reset()
+        }
+
     }
 
     return (
@@ -31,7 +46,7 @@ const Login = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="rounded-lg border w-full p-4 px-3 md:px-6 drop-shadow-md space-y-4 bg-white"
             >
-                <h1 className="text-2xl font-bold bg-clip-text bg-gradient-to-r from-pink-400 via-violet-400 to-blue-600 text-transparent">
+                <h1 className="text-2xl font-bold text-zinc-500">
                     Login to your account
                 </h1>
                 <FormField
@@ -40,12 +55,16 @@ const Login = () => {
                     render={({field}) => (
                         <FormItem>
                             <FormControl>
-                                <Input
-                                    className="outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                                    type="email"
-                                    placeholder="example@gmail.com"
-                                    {...field}
-                                />
+                                <div
+                                    className="flex items-center gap-x-2 border rounded-lg focus-within:shadow-md  p-1 px-2">
+                                    <MailOpen/>
+                                    <Input
+                                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                                        type="email"
+                                        placeholder="example@gmail.com"
+                                        {...field}
+                                    />
+                                </div>
                             </FormControl>
                             <FormMessage/>
                         </FormItem>
@@ -58,20 +77,32 @@ const Login = () => {
                     render={({field}) => (
                         <FormItem>
                             <FormControl>
-                                <Input
-                                    className="outline-none focus-visible:ring-0 focus-visible:ring-transparent mb-4"
-                                    type="password"
-                                    placeholder="Your password"
-                                    {...field}
-                                />
+                                <div
+                                    className="flex items-center gap-x-2 border rounded-lg focus-within:shadow-md p-1 px-2">
+                                    <KeyRound/>
+                                    <Input
+                                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                                        type="password"
+                                        placeholder="Your password"
+                                        {...field}
+                                    />
+                                </div>
                             </FormControl>
                             <FormMessage/>
                         </FormItem>
                     )}
                     disabled={isLoading}
                 />
-                <Button type="submit"
-                        className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400">Login</Button>
+                <div className="flex space-x-2">
+                    <span className="font-mono">Forget your password?</span>
+                    <p className="cursor-pointer text-blue-700" onClick={() => router.push("/resetPassword")}>click here</p>
+                </div>
+                <Button
+                    type="submit"
+                    className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400"
+                >
+                    Login
+                </Button>
             </form>
         </Form>
     )
