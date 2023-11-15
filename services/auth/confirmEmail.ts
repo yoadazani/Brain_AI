@@ -1,6 +1,6 @@
 "use server"
 
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/auth/findUser";
 import {generateOtp} from "@/utils/generateOtp";
 import {sendMail} from "@/lib/mailSender";
 import {IConfirmEmailResponse} from "@/interfaces/auth/IConfirmEmailResponse";

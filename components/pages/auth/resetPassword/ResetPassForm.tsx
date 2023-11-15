@@ -8,7 +8,7 @@ import * as z from "zod"
 import {resetPasswordSchema} from "@/constants/auth/resetPasswordConstant";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useQueryString} from "@/hooks/useQueryString";
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/auth/findUser";
 import axios from "axios";
 import {encode} from "base-64";
 import {useRouter} from "next/navigation";
@@ -46,7 +46,7 @@ export const ResetPassForm = () => {
                     duration: 3000,
                 })
 
-                router.push("/login")
+                router.push("/user/login")
             } catch (error) {
                 console.log(error)
             } finally {

@@ -1,9 +1,11 @@
+import {IUserAuth} from "@/interfaces/auth/IUserAuth";
+import {AxiosError} from "axios";
+
 export interface IAuthContext {
-    user: {
-        name: string
-        email: string
-        image?: string
-        password?: string
-        token?: string
-    }
+    getUserInfo: () => Promise<IUserAuth>
+    isAuth: () => Promise<{
+        user: IUserAuth | null
+        error: Error | any
+    }>
+    logout: () => void
 }

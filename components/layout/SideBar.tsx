@@ -6,10 +6,13 @@ import Logo from "./Logo";
 import {cn} from "@/lib/utils";
 import {sideBarLinks} from "@/data/sideBarLinks";
 import {usePathname, useRouter} from "next/navigation";
+import {Button} from "@/components/ui/button";
+import {useAuth} from "@/context/auth/AuthProvider";
 
 const SideBar = () => {
     const pathname = usePathname()
     const router = useRouter()
+    const { logout } = useAuth()
 
     return (
         <>
@@ -28,6 +31,10 @@ const SideBar = () => {
 
                     })}
                 </div>
+
+                <Button className="absolute bottom-5 right-5" onClick={logout}>
+                    Logout
+                </Button>
             </div>
         </>
     )

@@ -13,6 +13,8 @@ import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import {toast} from "@/components/ui/use-toast";
+
 
 const Login = () => {
 
@@ -29,11 +31,27 @@ const Login = () => {
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         console.log(data)
         try {
-            const res = await axios.post('/api/login', data)
+            const res = await axios.post('/api/auth/login', data)
 
-            console.log(res.data)
+            console.log(res.status)
+            if (res.status === 200) {
+                toast({
+                    title: "Success",
+                    description: "Login successfully",
+                    className: "bg-green-400",
+                    variant: "default",
+                    duration: 3000,
+                })
+                router.push("/dashboard")
+            }
         } catch (error: any) {
-            alert(error.response.data)
+            console.log(error)
+            toast({
+                title: "Error",
+                description: error.message,
+                variant: "destructive",
+                duration: 3000,
+            })
         } finally {
             form.reset()
         }
@@ -95,7 +113,8 @@ const Login = () => {
                 />
                 <div className="flex space-x-2">
                     <span className="font-mono">Forget your password?</span>
-                    <p className="cursor-pointer text-blue-700" onClick={() => router.push("/resetPassword")}>click here</p>
+                    <p className="cursor-pointer text-blue-700" onClick={() => router.push("/user/resetPassword")}>click
+                        here</p>
                 </div>
                 <Button
                     type="submit"

@@ -27,7 +27,7 @@ const Register = () => {
     const isLoading = form.formState.isSubmitting
     const onSubmit = async (formData: z.infer<typeof registerSchema>) => {
         try {
-            const res = await axios.post('/api/register', formData)
+            const res = await axios.post('/api/auth/register', formData)
             alert(res.data)
         } catch (error: any) {
             alert(error.response.data)

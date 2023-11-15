@@ -3,12 +3,11 @@
 import {Card} from "@/components/ui/card";
 
 
-
-import {usePathname, useRouter} from "next/navigation"
+import {useRouter} from "next/navigation"
 import {sideBarLinks} from "@/data/sideBarLinks";
 import {cn} from "@/lib/utils";
 
-export default function Home() {
+function Home() {
     const router = useRouter()
     return (
         <>
@@ -40,3 +39,5 @@ export default function Home() {
         </>
     )
 }
+
+export default Home

@@ -16,8 +16,8 @@ export default function Home() {
         <main className="h-screen bg-gray-900">
             <div className="flex justify-end items-center space-x-8 py-2 px-4">
                 <ul className="flex space-x-4">
-                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/login")}>sign in</li>
-                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/register")}>sign up</li>
+                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/user/login")}>sign in</li>
+                    <li className="text-zinc-100 list-none cursor-pointer transform transition duration-700 hover:scale-105 hover:border-b-2" onClick={() => router.push("/user/register")}>sign up</li>
                 </ul>
                 <Avatar className="h-8 w-8">
                     <AvatarImage src={ICON}/>

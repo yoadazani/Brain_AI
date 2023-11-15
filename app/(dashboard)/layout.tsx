@@ -4,19 +4,22 @@ import {ReactNode} from "react";
 
 import SideBar from "@/components/layout/SideBar";
 import NavBar from "@/components/layout/NavBar";
+import ProtectedRoute from "@/components/app/protectedRoute";
 
 
 const DashboardLayout = ({children}: { children: ReactNode }) => {
     return (
-        <div className="flex gap-3 md:gap-0 md:flex-row h-screen overflow-hidden">
-            <div className="hidden h-full md:flex md:flex-col md:w-72 z-50">
-                <SideBar/>
+        <ProtectedRoute>
+            <div className="flex gap-3 md:gap-0 md:flex-row h-screen overflow-hidden">
+                <div className="hidden h-full md:flex md:flex-col md:w-72 z-50">
+                    <SideBar/>
+                </div>
+                <main className="flex flex-col w-full h-screen max-h-screen">
+                    <NavBar/>
+                    {children}
+                </main>
             </div>
-            <main className="flex flex-col w-full h-screen max-h-screen">
-                <NavBar/>
-                {children}
-            </main>
-        </div>
+        </ProtectedRoute>
     )
 }
 

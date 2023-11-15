@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server"
 import prisma from "@/lib/getPrismaClient";
 import {encode} from "base-64";
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/auth/findUser";
 
 export async function POST(request: Request) {
     try {

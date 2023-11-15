@@ -31,7 +31,7 @@ const ResetPassword = () => {
                 {isVerified && <ResetPassForm/>}
             </CardContent>
             <CardFooter>
-                <Button variant="outline" onClick={() => router.push("/login")} className="w-full">
+                <Button variant="outline" onClick={() => router.push("/user/login")} className="w-full">
                     Cancel
                 </Button>
             </CardFooter>

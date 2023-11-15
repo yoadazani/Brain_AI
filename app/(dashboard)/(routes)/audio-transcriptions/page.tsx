@@ -15,6 +15,7 @@ import {WaveSurferAudio} from "@/components/pages/audio-transcriptions/WaveSurfe
 import {SelectLang} from "@/components/pages/audio-transcriptions/SelectLang";
 import axios from "axios";
 
+
 const MusicGenerator = () => {
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
