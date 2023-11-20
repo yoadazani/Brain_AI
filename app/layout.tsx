@@ -4,8 +4,9 @@ import {Inter} from 'next/font/google'
 import {ReactNode} from "react";
 import CrispChat from "@/components/app/CrispChat";
 import {Toaster} from "@/components/ui/toaster";
+import NextAuthProvider from "@/context/auth/NextAuthProvider";
 
-const inter = Inter({ subsets: ['latin'], fallback: ['system-ui', 'arial'] })
+const inter = Inter({subsets: ['latin'], fallback: ['system-ui', 'arial']})
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -14,12 +15,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-            <Toaster/>
-            <CrispChat />
-                {children}
-            </body>
-        </html>
+        <NextAuthProvider>
+            <html lang="en">
+                <body className={inter.className}>
+                    <Toaster/>
+                    <CrispChat/>
+                    {children}
+                </body>
+            </html>
+        </NextAuthProvider>
     )
 }

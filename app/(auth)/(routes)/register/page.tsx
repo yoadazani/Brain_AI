@@ -12,15 +12,17 @@ import {registerSchema} from "@/constants/auth/registerConstant"
 import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
+import {useRouter} from "next/navigation";
 
 const Register = () => {
 
+    const router = useRouter()
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
             email: "",
-            password: ""
+            hashedPassword: ""
         }
     })
 
@@ -29,6 +31,8 @@ const Register = () => {
         try {
             const res = await axios.post('/api/register', formData)
             alert(res.data)
+
+            router.push("/login")
         } catch (error: any) {
             alert(error.response.data)
         } finally {
@@ -90,7 +94,7 @@ const Register = () => {
                     disabled={isLoading}
                 />
                 <FormField
-                    name="password"
+                    name="hashedPassword"
                     control={form.control}
                     render={({field}) => (
                         <FormItem>

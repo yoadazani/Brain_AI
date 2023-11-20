@@ -1,15 +1,15 @@
 import {NextResponse} from "next/server"
-import prisma from "@/lib/getPrismaClient";
-import {encode} from "base-64";
+import prisma, {connectToDatabase} from "@/lib/getPrismaClient";
+import bcrypt from "bcrypt"
 import {findUser} from "@/services/queries/auth/findUser";
 
 export async function POST(request: Request) {
     try {
-        const {name, email, password} = await request.json()
+        const userInfo = await request.json()
 
-        const encodedPassword = encode(password)
 
-        const userExists = await findUser(email)
+        await connectToDatabase()
+        const userExists = await findUser(userInfo.email)
 
         if (userExists) {
             return new NextResponse("user already exists", {
@@ -17,11 +17,12 @@ export async function POST(request: Request) {
             })
         }
 
+        const encodedPassword = bcrypt.hashSync(userInfo.hashedPassword, 10)
+
         const user = await prisma?.user.create({
             data: {
-                name,
-                email,
-                password: encodedPassword
+                ...userInfo,
+                hashedPassword: encodedPassword
             }
         })
 

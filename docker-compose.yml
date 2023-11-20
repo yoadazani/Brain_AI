@@ -1,13 +1,23 @@
-version: '3.8'
+version: '3.1'
+
 services:
-  db:
-    image: postgres:12
+
+  mongo:
+    image: mongo
     restart: always
     environment:
-      POSTGRES_USER: your_username
-      POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: your_database_name
-    volumes:
-      - ./data:/var/lib/postgresql/data
+      MONGO_INITDB_ROOT_USERNAME: Brain_db
+      MONGO_INITDB_ROOT_PASSWORD: 208389403
     ports:
-      - "5432:5432"
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: Brain_db
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 208389403
+    ports:
+      - "8081:8081"

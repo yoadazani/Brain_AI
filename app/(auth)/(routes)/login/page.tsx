@@ -2,6 +2,7 @@
 
 import {useForm} from "react-hook-form";
 import {KeyRound, MailOpen} from "lucide-react"
+import {FaGoogle, FaGithub} from "react-icons/fa";
 
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
@@ -13,6 +14,8 @@ import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
 import axios from "axios";
+import {signIn} from "next-auth/react";
+import {toast} from "@/components/ui/use-toast";
 
 const Login = () => {
 
@@ -29,15 +32,37 @@ const Login = () => {
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         console.log(data)
         try {
-            const res = await axios.post('/api/login', data)
+            await signIn("credentials", {
+                ...data,
+                redirect: false,
+            })
 
-            console.log(res.data)
+            toast({
+                title: "Success",
+                description: "You have been logged in successfully",
+                variant: "default",
+                className: "bg-green-400",
+                duration: 3000
+            })
+
+            router.push("/dashboard")
         } catch (error: any) {
             alert(error.response.data)
         } finally {
             form.reset()
         }
 
+    }
+
+    const OAuthLogin = async (provider: string) => {
+        try {
+            await signIn(provider, {
+                callbackUrl: "/dashboard"
+            })
+
+        } catch (error: any) {
+            alert(error.response.data)
+        }
     }
 
     return (
@@ -96,6 +121,17 @@ const Login = () => {
                 <div className="flex space-x-2">
                     <span className="font-mono">Forget your password?</span>
                     <p className="cursor-pointer text-blue-700" onClick={() => router.push("/resetPassword")}>click here</p>
+                </div>
+
+                <div className="flex w-full justify-center items-center space-x-1">
+                    <div className="border border-dashed border-zinc-400 h-[0.2px] w-full"/>
+                    <span className="font-mono font-bold text-zinc-500">OR</span>
+                    <div className="border border-dashed border-zinc-400 h-[0.2px] w-full"/>
+                </div>
+
+                <div className="flex space-x-5 justify-center">
+                    <FaGithub className="cursor-pointer text-3xl" onClick={() => OAuthLogin("github")}/>
+                    <FaGoogle className="cursor-pointer text-3xl text-red-400" onClick={() => OAuthLogin("google")}/>
                 </div>
                 <Button
                     type="submit"
