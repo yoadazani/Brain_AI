@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server"
 import prisma, {connectToDatabase} from "@/lib/getPrismaClient";
 import bcrypt from "bcrypt"
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/actions/userActions/findUser";
 
 export async function POST(request: Request) {
     try {

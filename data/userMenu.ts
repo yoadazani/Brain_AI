@@ -1,11 +1,17 @@
-import {Settings, LogOut} from "lucide-react";
+import {Settings, LogOut, TrendingUp} from "lucide-react";
 
 const menuData = [
     {
         label: "manage-account",
         value: "Manage Account",
         icon: Settings,
-        link: "setting/profile"
+        link: "setting/account"
+    },
+    {
+        label: "upgrade-plan",
+        value: "Upgrade Plan",
+        icon: TrendingUp,
+        link: "setting/plans"
     },
     {
         label: "sign-out",

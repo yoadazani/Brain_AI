@@ -1,27 +1,20 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {useSession} from "next-auth/react";
 import Loader from "@/components/app/Loader";
+import {getUserFallback} from "@/utils/getUserFallback";
+import {AvatarProps} from "@/types/layout/avatarProps";
+import {cn} from "@/lib/utils";
 
-export const UserAvatar = () => {
+export const UserAvatar: FC<AvatarProps> = ({
+    width,
+    height,
+    userName,
+    userImage
+}) => {
 
-    const {data: session, status} = useSession();
-
-    if (status === "loading") {
-        return <Loader height="h-10" width="w-10"/>;
-    }
-
-    if (!session) return null;
-
-    const getUserFallback = () => {
-        const userName = session.user?.name?.split(" ")
-        return userName && userName.length > 1
-            ? `${userName?.[0][0]}${userName?.[1][0]}`.toUpperCase()
-            : `${userName?.[0][0]}${userName?.[0][1]}`.toUpperCase()
-    }
-
-    return <Avatar>
-        <AvatarImage src={session.user?.image || ""}/>
-        <AvatarFallback>{getUserFallback()}</AvatarFallback>
+    return <Avatar className={cn(width, height)}>
+        <AvatarImage src={userImage || ""}/>
+        <AvatarFallback>{getUserFallback(userName!)}</AvatarFallback>
     </Avatar>
 }

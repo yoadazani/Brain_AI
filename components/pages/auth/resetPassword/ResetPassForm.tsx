@@ -8,7 +8,7 @@ import * as z from "zod"
 import {resetPasswordSchema} from "@/constants/auth/resetPasswordConstant";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useQueryString} from "@/hooks/useQueryString";
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/actions/userActions/findUser";
 import axios from "axios";
 import {encode} from "base-64";
 import {useRouter} from "next/navigation";
@@ -31,27 +31,33 @@ export const ResetPassForm = () => {
         const userEmail = getQueryString("email") || ""
         const userInfo = await findUser(userEmail)
 
-        if (userInfo) {
-            try {
-                const { user } = userInfo
-                await axios.put(`http://localhost:3000/api/users/${user?.id}`, {
-                    ...user,
-                    password: encode(values.newPassword)
-                })
-                toast({
-                    title: "Success",
-                    description: "Password updated successfully",
-                    variant: "default",
-                    className: "bg-green-400",
-                    duration: 3000,
-                })
+        if (!userInfo) {
+            toast({
+                title: "Error",
+                description: "User not found",
+                variant: "destructive",
+                duration: 3000,
+            })
+            return
+        }
+        try {
+            await axios.put(`http://localhost:3000/api/users/${userInfo?.id}`, {
+                ...userInfo,
+                hashedPassword: values.newPassword
+            })
+            toast({
+                title: "Success",
+                description: "Password updated successfully",
+                variant: "default",
+                className: "bg-green-400",
+                duration: 3000,
+            })
 
-                router.push("/login")
-            } catch (error) {
-                console.log(error)
-            } finally {
-                form.reset()
-            }
+            router.push("/login")
+        } catch (error) {
+            console.log(error)
+        } finally {
+            form.reset()
         }
 
     }

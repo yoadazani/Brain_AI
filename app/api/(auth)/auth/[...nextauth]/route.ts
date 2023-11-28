@@ -1,17 +1,18 @@
 import NextAuth, {SessionStrategy} from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import prisma, {connectToDatabase} from "@/lib/getPrismaClient";
-import {findUser} from "@/services/queries/auth/findUser";
+import {PrismaAdapter} from "@next-auth/prisma-adapter"
+import client, {connectToDatabase} from "@/lib/getPrismaClient";
+import {findUser} from "@/services/actions/userActions/findUser";
 import bcrypt from "bcrypt";
 
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import {JwtPayload} from "jsonwebtoken";
 
 
 const authOptions = {
-    adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(client),
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID as string,
@@ -30,16 +31,16 @@ const authOptions = {
                 password: {label: 'Password', type: 'password'},
             },
             async authorize(credentials, req) {
-                const {email, password} = credentials as {email: string, password: string}
-
+                const {email, password} = credentials as { email: string, password: string }
+                console.log({email, password})
                 if (!email || !password) {
                     throw new Error('Please provide an email and password')
                 }
 
                 await connectToDatabase()
                 const user = await findUser(email)
-
-                if (!user || !user.hashedPassword) {
+                console.log({user})
+                if (!user) {
                     throw new Error('User not found')
                 }
 
@@ -52,15 +53,46 @@ const authOptions = {
             }
         })
     ],
+    callbacks: {
+        async jwt({token, trigger, session, user}: JwtPayload) {
+            console.log(session)
+            if (trigger === "update" && session) {
+                token = {
+                    ...token,
+                    ...session
+                }
+            }
+            if (user) {
+                return {
+                    ...token,
+                    uid: user.id
+                }
+            }
+
+            return token
+        },
+        async session({session, token}: JwtPayload) {
+            if (token) session.user.id = token.uid
+
+            session = {
+                ...session,
+                user: {
+                    ...session.user,
+                    name: token.name,
+                    email: token.email,
+                    image: token.picture
+                }
+            }
+
+            return session
+        }
+    },
     session: {
         strategy: 'jwt' as SessionStrategy,
         maxAge: 60 * 60 * 24 // 24 hours
     },
-    pages: {
-        signIn: '/login',
-    },
+    pages: {signIn: '/login'},
     secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === 'development',
 }
 
 const handler = NextAuth(authOptions)

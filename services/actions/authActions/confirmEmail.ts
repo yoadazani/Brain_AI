@@ -1,17 +1,17 @@
 "use server"
 
-import {findUser} from "@/services/queries/auth/findUser";
+import {findUser} from "@/services/actions/userActions/findUser";
 import {generateOtp} from "@/utils/generateOtp";
 import {sendMail} from "@/lib/mailSender";
 import {IConfirmEmailResponse} from "@/interfaces/auth/IConfirmEmailResponse";
 
 
 export const confirmEmail = async (email: string) => {
-    const { user } = await findUser(email)
+    const user = await findUser(email)
 
-    if (!user) return {
+    if (!user || !user.hashedPassword) return {
         status: "error",
-        message: "There is no user with this email"
+        message: "User not found"
     } as IConfirmEmailResponse
 
     const OTP = generateOtp()

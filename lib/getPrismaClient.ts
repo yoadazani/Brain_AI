@@ -1,27 +1,12 @@
 // @ts-nocheck
 import {PrismaClient} from "@prisma/client";
 
-let prisma: PrismaClient;
-declare global {
-    namespace NodeJS {
-        interface Global {
-            prisma: PrismaClient;
-        }
-    }
-}
-
-if (process.env.NODE_ENV === 'production') {
-    prisma = new PrismaClient();
-} else {
-    if (!global.prisma) {
-        global.prisma = new PrismaClient();
-    }
-    prisma = global.prisma;
-}
+let client = globalThis.prisma || new PrismaClient();
+if (process.env.NODE_ENV === 'production') globalThis.prisma = client;
 
 export const connectToDatabase = async () => {
     try {
-        await prisma.$connect();
+        await client.$connect();
         console.log("Connected to database");
     } catch (error) {
         console.error(error);
@@ -29,4 +14,4 @@ export const connectToDatabase = async () => {
     }
 }
 
-export default prisma;
+export default client;

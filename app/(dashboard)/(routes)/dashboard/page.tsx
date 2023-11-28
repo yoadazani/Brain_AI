@@ -12,13 +12,14 @@ export default function Home() {
     const router = useRouter()
     return (
         <>
-            <div className="flex flex-col justify-center items-center space-y-2 lg:space-y-4 mb-3 lg:mb-5">
+            <div className="flex flex-col text-center justify-center items-center space-y-2 lg:space-y-4 mb-3 lg:mb-5">
                 <h1 className="text-3xl font-bold tracking-wider"> Explore the power of AI </h1>
                 <span className="text-zinc-500 tracking-wider">chat with the smartest AI today - it's free and easy to use</span>
             </div>
             <main className="flex flex-col h-full px-4 md:px-20 lg:px-32 space-y-3 xg:space-y-4">
-                {sideBarLinks?.map(link => (
-                    <Card key={link.name} className="flex items-center justify-between p-2 xl:p-3 cursor-pointer"
+                {sideBarLinks?.map(link => {
+                    return (link.name !== "setting")
+                        && <Card key={link.name} className="flex items-center justify-between p-2 xl:p-3 cursor-pointer"
                           onClick={() => router.push(link.href)}>
                         <div className="flex flex-row items-center space-x-4">
                             <div className="w-fit rounded-md">
@@ -35,7 +36,7 @@ export default function Home() {
                             </svg>
                         </div>
                     </Card>
-                ))}
+                })}
             </main>
         </>
     )

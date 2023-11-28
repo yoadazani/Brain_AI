@@ -9,7 +9,7 @@ import {verifyEmailSchema} from "@/constants/auth/verifyEmailConstant";
 import {signal} from "@preact/signals"
 import {VerificationFormProps} from "@/types/pages/auth/resetPassword/verificationFormProps";
 import {useQueryString} from "@/hooks/useQueryString";
-import {confirmEmail} from "@/services/queries/auth/confirmEmail";
+import {confirmEmail} from "@/services/actions/authActions/confirmEmail";
 import {toast} from "@/components/ui/use-toast";
 
 export const OTP = signal<string>("")

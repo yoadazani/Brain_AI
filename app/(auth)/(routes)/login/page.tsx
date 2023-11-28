@@ -30,7 +30,6 @@ const Login = () => {
 
     const isLoading = form.formState.isSubmitting
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-        console.log(data)
         try {
             await signIn("credentials", {
                 ...data,
