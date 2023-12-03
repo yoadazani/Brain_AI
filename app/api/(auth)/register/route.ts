@@ -32,6 +32,34 @@ export async function POST(request: Request) {
             })
         }
 
+        const userSubscription = await prisma?.userSubscription.create({
+            data: {
+                user: {
+                    connect: {
+                        id: user.id
+                    }
+                },
+                plan: "free",
+                limit: 5
+            }
+        })
+        if (!userSubscription) {
+            return new NextResponse("internal server error", {
+                status: 500
+            })
+        }
+
+        await prisma?.UserApiLimit.create({
+            data: {
+                user: {
+                    connect: {
+                        id: user.id
+                    }
+                },
+                count: 0
+            }
+        })
+
         return NextResponse.json("user created successfully", {
             status: 200
         })

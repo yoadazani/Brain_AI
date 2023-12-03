@@ -51,8 +51,8 @@ export const sideBarLinks = [
                 subLinks: []
             },
             {
-                name: "Planes",
-                href: "/setting/planes",
+                name: "Plans",
+                href: "/setting/plans",
                 icon: Clover,
                 color: "text-indigo-600",
                 subLinks: []
