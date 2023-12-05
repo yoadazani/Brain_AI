@@ -1,0 +1,80 @@
+"use client"
+
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
+import {FC} from "react";
+import {PlanCardProps} from "@/types/pages/setting/plans/planCardProps";
+import {formatCurrency} from "@/utils/formatCurrency";
+import axios from "axios";
+import {checkUserSubscription} from "@/services/actions/userSubscription/checkUserSubscription";
+import {useRouter} from "next/navigation";
+
+export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, price, isPro}) => {
+    const router = useRouter()
+    const currentPrice = price ? formatCurrency(price) : null
+
+    const handleSubscription = async () => {
+        try {
+            const response = await axios.get("/api/stripe")
+
+            router.replace(response.data.url)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return <Card className="text-center">
+        <CardHeader>
+            <CardTitle>
+                {title}
+            </CardTitle>
+            <CardDescription>
+                {description}
+            </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+            <div className="flex justify-center items-end space-x-1">
+                {
+                    !currentPrice ? (
+                        <span className="text-4xl font-bold">Free Plan</span>
+                    ) : (
+                        <>
+                            <span className="text-4xl font-bold">{currentPrice}</span>
+                            <span className="text-zinc-500">/ month</span>
+                        </>
+                    )
+                }
+            </div>
+            <div className="space-x-2t">
+                <span>{planOptions[0].available ? "✅" : "❌"}</span>
+                <span className="text-zinc-500">{planOptions[0].option}</span>
+            </div>
+        </CardContent>
+
+        <CardFooter>
+            {
+                price ? (
+                    <>
+                        <Button
+                            variant="premium"
+                            className="w-full"
+                            onClick={handleSubscription}
+                        >
+                            {isPro ? "Manage Subscription" : "Upgrade"}
+                        </Button>
+                    </>
+                ) : (
+                    <Button
+                        variant="premium"
+                        className="w-full"
+                        disabled
+                    >
+                        Your plan
+                    </Button>
+                )
+            }
+        </CardFooter>
+    </Card>
+
+}

@@ -114,7 +114,7 @@ export const ResetPassForm = () => {
 
                 <Button
                     type="submit"
-                    className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400"
+                    variant="premium"
                 >
                     Reset now
                 </Button>

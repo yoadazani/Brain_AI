@@ -14,8 +14,11 @@ import {Button} from "@/components/ui/button";
 import {WaveSurferAudio} from "@/components/pages/audio-transcriptions/WaveSurferAudio";
 import {SelectLang} from "@/components/pages/audio-transcriptions/SelectLang";
 import axios from "axios";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 const MusicGenerator = () => {
+    const router = useRouter()
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
     const [audio, setAudio] = useState<string | null>();
@@ -57,6 +60,7 @@ const MusicGenerator = () => {
             })
         } finally {
             setLoading(false)
+            router.refresh()
         }
     }
 

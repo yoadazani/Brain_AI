@@ -110,8 +110,7 @@ export const AccountForm = () => {
         {
             isEditable && <div className="flex space-x-4 justify-end">
                 <Button
-                    variant="outline"
-                    className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400 text-zinc-100"
+                    variant="premium"
                     onClick={handleSave}
                 >
                     Save Changes

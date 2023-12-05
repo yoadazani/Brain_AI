@@ -32,9 +32,11 @@ const Conversation = () => {
             })
             setMessages([...messages, userMessage, res.data])
         } catch (error) {
+            const {response} = error as {response: {data: string}}
+            const {data} = response
             toast({
                 title: 'Error',
-                description: 'Something went wrong',
+                description: data,
                 variant: "destructive",
                 duration: 3000,
             })

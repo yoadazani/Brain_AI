@@ -31,10 +31,19 @@ const Login = () => {
     const isLoading = form.formState.isSubmitting
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         try {
-            await signIn("credentials", {
+            const signInResponse = await signIn("credentials", {
                 ...data,
                 redirect: false,
             })
+
+            if (!signInResponse?.ok) {
+                return toast({
+                    title: "Error",
+                    description: signInResponse?.error,
+                    variant: "destructive",
+                    duration: 3000
+                })
+            }
 
             toast({
                 title: "Success",
@@ -134,7 +143,7 @@ const Login = () => {
                 </div>
                 <Button
                     type="submit"
-                    className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400"
+                    variant="premium"
                 >
                     Login
                 </Button>

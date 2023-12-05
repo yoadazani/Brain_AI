@@ -11,7 +11,7 @@ import GitHubProvider from "next-auth/providers/github";
 import {JwtPayload} from "jsonwebtoken";
 
 
-const authOptions = {
+export const authOptions = {
     adapter: PrismaAdapter(client),
     providers: [
         GoogleProvider({

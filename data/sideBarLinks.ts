@@ -1,4 +1,4 @@
-import {Code, Image, LayoutDashboard, MessageSquare, Music, Settings, User, Clover} from "lucide-react";
+import {Code, Image, LayoutDashboard, MessageSquare, Music, Settings, User, Zap} from "lucide-react";
 
 
 export const sideBarLinks = [
@@ -51,9 +51,9 @@ export const sideBarLinks = [
                 subLinks: []
             },
             {
-                name: "Planes",
-                href: "/setting/planes",
-                icon: Clover,
+                name: "Plans",
+                href: "/setting/plans",
+                icon: Zap,
                 color: "text-indigo-600",
                 subLinks: []
             }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import LogoImage from '@/assets/Brain.svg'
 
@@ -7,19 +7,22 @@ import {cn} from "@/lib/utils";
 import {sideBarLinks} from "@/data/sideBarLinks";
 import {usePathname, useRouter} from "next/navigation";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
+import {LimitCounter} from "@/components/app/LimitCounter";
+import {IsPro} from "@/components/app/IsPro";
 
-const SideBar = () => {
+const SideBar = ({userApiLimit, isPro}: {userApiLimit: number, isPro: boolean}) => {
     const pathname = usePathname()
     const router = useRouter()
 
+
     return (
-        <>
-            <div className="h-full relative bg-gray-900">
+        <div className="flex flex-col justify-between h-full relative bg-gray-900">
+            <div>
                 <Logo src={LogoImage} context="Brain" color="text-white"/>
 
                 <div className="flex flex-col mt-6">
                     {sideBarLinks.map((link) => {
-                        return <div key={link.name} >
+                        return <div key={link.name}>
 
                             {!link.subLinks &&
                                 <div
@@ -53,8 +56,8 @@ const SideBar = () => {
                                                 key={subLink.name}
                                                 onClick={() => router.push(subLink.href)}
                                                 className={cn("flex items-center py-2 pl-10 space-x-4 rounded-md hover:bg-gray-800 cursor-pointer", {
-                                                "bg-gray-800": pathname === subLink.href
-                                            })}
+                                                    "bg-gray-800": pathname === subLink.href
+                                                })}
                                             >
                                                 <subLink.icon className={cn("w-5 h-5", subLink.color)}/>
                                                 <span className="text-gray-100 text-sm">{subLink.name}</span>
@@ -65,11 +68,15 @@ const SideBar = () => {
                                 </Accordion>
                             }
                         </div>
-
                     })}
                 </div>
             </div>
-        </>
+            {
+                isPro
+                ? <IsPro />
+                :<LimitCounter apiLimitCount={userApiLimit}/>
+            }
+        </div>
     )
 }
 

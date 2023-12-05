@@ -66,7 +66,7 @@ export const VerifyEmail = ({setUserEmail}: VerificationFormProps) => {
             />
             <Button
                 type="submit"
-                className="rounded-sm bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400"
+                variant="premium"
             >
                 Submit
             </Button>

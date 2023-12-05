@@ -1,17 +1,38 @@
+"use client"
+
 import React from "react";
-import AccountCard from "@/components/pages/setting/account";
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {AccountForm} from "@/components/pages/setting/account/AccountForm";
+import {Button} from "@/components/ui/button";
+import {useQueryString} from "@/hooks/useQueryString";
 
 const Account = () => {
+    const {createQueryString, getQueryString} = useQueryString();
+
+    const handleEdit = () => {
+        createQueryString("isEditable", "1");
+    }
+
     return (
-        <div className="space-y-4">
-            <div className="flex flex-col justify-center items-center text-center space-y-4 lg:space-y-1 pt-1 mb-3 lg:mb-3">
-                <h1 className="text-2xl font-bold tracking-wider"> Manage Your Account </h1>
-                <span className="text-zinc-500 tracking-wider text-sm"> make changes to your account here. you can`t change your password here. </span>
-            </div>
-            <main className="px-4 md:px-8 lg:px-16">
-                    <AccountCard/>
-            </main>
-        </div>
+        <Card className="w-[90%] md:w-[80%] xl:w-[60%] m-auto">
+            <CardHeader>
+                <CardTitle>
+                    Manage Your Account
+                </CardTitle>
+            </CardHeader>
+
+            <CardContent>
+                <AccountForm />
+            </CardContent>
+
+            <CardFooter>
+                <Button
+                    onClick={handleEdit}
+                    disabled={getQueryString("isEditable") === "1"}
+                    variant="premium"
+                >Update Account</Button>
+            </CardFooter>
+        </Card>
     )
 }
 

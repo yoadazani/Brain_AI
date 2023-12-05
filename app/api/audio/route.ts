@@ -1,6 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
 import openai from "@/lib/openaiConnection";
 import {Uploadable} from "openai/uploads";
+import {checkUserLimit} from "@/services/actions/apiLimitActions/checkUserLimit";
+import {increaseUserLimit} from "@/services/actions/apiLimitActions/increaseUserLimit";
+import {checkUserSubscription} from "@/services/actions/userSubscription/checkUserSubscription";
 
 export async function POST(request: NextRequest) {
     try {
@@ -26,6 +29,15 @@ export async function POST(request: NextRequest) {
                 status: 400
             })
         }
+        const isPro = await checkUserSubscription()
+
+        const freeTrial = await checkUserLimit()
+
+        if (!freeTrial && !isPro) {
+            return new NextResponse("api limit is expired!", {
+                status: 400
+            })
+        }
 
         const response = await openai.audio.transcriptions.create({
             file: data.input_audio as Uploadable,
@@ -34,6 +46,8 @@ export async function POST(request: NextRequest) {
             response_format: "json",
             temperature: 0.5
         })
+
+        if (!isPro) await increaseUserLimit()
 
         return NextResponse.json({
             role: "assistant",
