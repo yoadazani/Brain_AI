@@ -6,7 +6,7 @@ import CrispChat from "@/components/app/CrispChat";
 import {Toaster} from "@/components/ui/toaster";
 import NextAuthProvider from "@/context/auth/NextAuthProvider";
 
-const inter = Inter({subsets: ['latin'], fallback: ['system-ui', 'arial']})
+const inter = Inter({subsets: ['latin'], fallback: ['system-ui', 'arial'], variable: '--font-inter'})
 
 export const metadata: Metadata = {
     title: 'Create Next App',
