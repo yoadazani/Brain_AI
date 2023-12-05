@@ -1,12 +1,9 @@
 "use server"
 import {getUserLimit} from "@/services/actions/apiLimitActions/getUserLimit";
-import {getUserSubscription} from "@/services/actions/userSubscription/getUserSubscription";
-export const checkUserLimit = async (userId: string) => {
 
-    const userPlan = await getUserSubscription(userId)
-    const userApiLimit = await getUserLimit(userId)
+import {FREE_TRIAL_LIMIT} from "@/constants/app/freeTrialLimit";
+export const checkUserLimit = async () => {
+    const userApiLimit = await getUserLimit()
 
-    if (!userApiLimit || !userPlan) return false
-
-    if (userApiLimit.count >= userPlan.limit) return false
+    return (!userApiLimit || userApiLimit < FREE_TRIAL_LIMIT)
 }

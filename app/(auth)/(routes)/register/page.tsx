@@ -115,8 +115,12 @@ const Register = () => {
                     )}
                     disabled={isLoading}
                 />
-                <Button type="submit"
-                        className="bg-gradient-to-r from-pink-400 to-blue-400">Register</Button>
+                <Button
+                    type="submit"
+                    variant="premium"
+                >
+                    Register
+                </Button>
             </form>
         </Form>
     )

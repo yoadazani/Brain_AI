@@ -7,7 +7,8 @@ import {SideBarPositionT} from "@/types/layout/SideBarPositionT";
 
 
 const SIDE_BAR_POSITION: SideBarPositionT = "left"
-const MobileSideBar = () => {
+const MobileSideBar = ({userApiLimit, isPro}: {userApiLimit: number, isPro: boolean}) => {
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -18,7 +19,7 @@ const MobileSideBar = () => {
                 </svg>
             </SheetTrigger>
             <SheetContent side={SIDE_BAR_POSITION} className="p-0 w-72">
-                <SideBar/>
+                <SideBar userApiLimit={userApiLimit} isPro={isPro}/>
             </SheetContent>
         </Sheet>
     )

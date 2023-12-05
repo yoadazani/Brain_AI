@@ -29,7 +29,7 @@ const Account = () => {
                 <Button
                     onClick={handleEdit}
                     disabled={getQueryString("isEditable") === "1"}
-                    className="bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400"
+                    variant="premium"
                 >Update Account</Button>
             </CardFooter>
         </Card>

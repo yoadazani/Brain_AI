@@ -8,4 +8,5 @@ export type PlanCardProps = {
     description: string
     planOptions: PlanOptions[]
     price: number | undefined
+    isPro: boolean
 }

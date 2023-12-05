@@ -1,11 +1,27 @@
+"use client"
+
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {FC} from "react";
 import {PlanCardProps} from "@/types/pages/setting/plans/planCardProps";
 import {formatCurrency} from "@/utils/formatCurrency";
+import axios from "axios";
+import {checkUserSubscription} from "@/services/actions/userSubscription/checkUserSubscription";
+import {useRouter} from "next/navigation";
 
-export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, price}) => {
+export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, price, isPro}) => {
+    const router = useRouter()
     const currentPrice = price ? formatCurrency(price) : null
+
+    const handleSubscription = async () => {
+        try {
+            const response = await axios.get("/api/stripe")
+
+            router.replace(response.data.url)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return <Card className="text-center">
         <CardHeader>
@@ -39,11 +55,21 @@ export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, pr
         <CardFooter>
             {
                 price ? (
-                    <Button className="w-full rounded-sm bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400">
-                        Upgrade
-                    </Button>
+                    <>
+                        <Button
+                            variant="premium"
+                            className="w-full"
+                            onClick={handleSubscription}
+                        >
+                            {isPro ? "Manage Subscription" : "Upgrade"}
+                        </Button>
+                    </>
                 ) : (
-                    <Button className="w-full rounded-sm bg-gradient-to-r from-pink-400 via-violet-400 to-blue-400">
+                    <Button
+                        variant="premium"
+                        className="w-full"
+                        disabled
+                    >
                         Your plan
                     </Button>
                 )

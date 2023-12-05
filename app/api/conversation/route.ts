@@ -1,5 +1,8 @@
 import {NextResponse} from "next/server";
 import openai from "@/lib/openaiConnection";
+import {increaseUserLimit} from "@/services/actions/apiLimitActions/increaseUserLimit";
+import {checkUserLimit} from "@/services/actions/apiLimitActions/checkUserLimit";
+import {checkUserSubscription} from "@/services/actions/userSubscription/checkUserSubscription";
 
 
 export async function POST(req: Request) {
@@ -20,12 +23,24 @@ export async function POST(req: Request) {
             })
         }
 
+        const isPro = await checkUserSubscription()
+
+        const freeTrial = await checkUserLimit()
+
+        if (!freeTrial && !isPro) {
+            return new NextResponse("api limit is expired!", {
+                status: 400
+            })
+        }
+
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages,
             temperature: 0.7,
             max_tokens: 1000
         })
+
+        if (!isPro) await increaseUserLimit()
 
         return NextResponse.json(response.choices[0].message)
     } catch (error) {
