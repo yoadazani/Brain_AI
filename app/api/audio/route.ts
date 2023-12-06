@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         }
 
         const file = data.input_audio as File
-        if (file.size > 2 * 1024 * 1024) {
+        if (file.size > 4 * 1024 * 1024) {
             return new NextResponse("file size is too large", {
                 status: 400
             })
