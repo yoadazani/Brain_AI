@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const absoluteUrl = (path: string) => {
-  return `${process.env.NEXT_PUBLIC_APP_URL!}${path}`
+  return `${process.env.NEXTAUTH_URL!}${path}`
 }
