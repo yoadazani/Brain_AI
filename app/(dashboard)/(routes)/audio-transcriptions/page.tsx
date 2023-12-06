@@ -64,6 +64,10 @@ const MusicGenerator = () => {
         }
     }
 
+    const handleClear = () => {
+        setAudio(null)
+    }
+
     return (
         <div className="grid row-span-full h-screen overflow-hidden pb-1 px-4 md:px-8 lg:px-16 relative">
             <div className="flex items-center space-x-4">
@@ -102,7 +106,7 @@ const MusicGenerator = () => {
                                     "bg-white mr-10 ml-1": message?.role !== "assistant"
                                 })}>
                                 <div className={cn("flex flex-col justify-end relative overflow-auto w-full", {
-                                    "w-[192px] sm:w-[250px] md:w-[282px] lg:w-[325px] xl:w-[500px]": message?.role === "user"
+                                    "w-[220px] sm:w-[280px] md:w-[320px] lg:w-[380px]": message?.role === "user"
                                 })}>
                                     {message.role === "user" && <WaveSurferAudio url={message.content}/>}
                                     {message.role === "assistant" && <p>{message.content}</p>}
@@ -133,14 +137,14 @@ const MusicGenerator = () => {
                         type="file"
                         name="input_audio"
                         id="input_audio"
-                        accept=".mp3, .m4a"
+                        accept="audio/*"
                         className="h-full w-full hidden border-dotted border-2"
                         onChange={handleAudioChange}
                     />
                 </div>
 
                 <div className="flex flex-col place-items-center justify-between space-y-1">
-                    <Button type="submit" variant="ghost" onClick={() => setAudio(null)}>
+                    <Button type="reset" variant="ghost" onClick={handleClear}>
                         <AiOutlineClear
                             className="text-xl cursor-pointer active:text-muted-foreground hover:text-muted-foreground"
                         />
