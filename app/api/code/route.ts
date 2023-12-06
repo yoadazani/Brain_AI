@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         }
 
         const response = await openai.chat.completions.create({
-            model: "gpt-4",
+            model: "gpt-3.5-turbo",
             messages: [instructionMessage, ...messages],
             temperature: 0.7
         })
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
         return NextResponse.json(response.choices[0].message)
     } catch (error: any) {
         console.log("[CONVERSATION_ERROR]", error)
-        return new NextResponse(`internal server error ${error.message}`, {
+        return new NextResponse(`internal server error`, {
             status: 500
         })
     }
