@@ -39,7 +39,7 @@ export default function Home() {
             </div>
             <main className="flex flex-col h-full px-4 md:px-20 lg:px-32 space-y-3 xg:space-y-4">
                 {sideBarLinks?.map(link => {
-                    return (link.name !== "setting")
+                    return (link.name !== "setting" && link.name !== "dashboard" )
                         && <Card
                             key={link.name}
                             className="flex items-center justify-between p-2 xl:p-3 cursor-pointer"
