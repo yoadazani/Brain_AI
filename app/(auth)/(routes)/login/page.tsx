@@ -131,7 +131,7 @@ const Login = () => {
                     )}
                     disabled={isLoading}
                 />
-                <div className="flex justify-between px-5">
+                <div className="flex flex-col md:flex-row justify-center md:justify-between px-5">
                     <div className="flex space-x-2 text-sm">
                         <p className="font-normal">Forget your password?</p>
                         <Link
