@@ -137,7 +137,7 @@ const MusicGenerator = () => {
                         type="file"
                         name="input_audio"
                         id="input_audio"
-                        accept="audio/*"
+                        accept="audio/*, OPUS"
                         className="h-full w-full hidden border-dotted border-2"
                         onChange={handleAudioChange}
                     />
