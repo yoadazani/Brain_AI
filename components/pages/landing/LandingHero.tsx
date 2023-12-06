@@ -8,7 +8,7 @@ import {Session} from "next-auth";
 export const LandingHero = ({session}: { session: Session } ) => {
 
     return <>
-        <div className="text-white font-bold px-36 py-28 text-center space-y-5">
+        <div className="text-white font-bold px-12 md:px-32 py-28 text-center space-y-5">
             <div className="text-4xl sm:text-5xl md:text-6xl space-y-5 font-extrabold">
                 <h1>
                     The Best AI Tool For

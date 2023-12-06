@@ -18,7 +18,7 @@ export const LandingNavBar = () => {
             <div className="flex space-x-4">
                 <Link href={"/login"}>
                     <Badge
-                        className="text-sm text-center border-0 pb-1 font-bold uppercase"
+                        className="text-sm text-center border-0 py-0.5 font-bold uppercase"
                         variant="premium"
                     >
                         sign in
@@ -26,7 +26,7 @@ export const LandingNavBar = () => {
                 </Link>
                 <Link href={"/register"}>
                     <Badge
-                        className="text-sm text-center border-0 pb-1 font-bold uppercase"
+                        className="text-sm text-center border-0 py-0.5 font-bold uppercase"
                         variant="premium"
                     >
                         sign up
