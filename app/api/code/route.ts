@@ -46,9 +46,9 @@ export async function POST(req: Request) {
         if (!isPro) await increaseUserLimit()
 
         return NextResponse.json(response.choices[0].message)
-    } catch (error) {
+    } catch (error: any) {
         console.log("[CONVERSATION_ERROR]", error)
-        return new NextResponse("internal server error", {
+        return new NextResponse(`internal server error ${error.message}`, {
             status: 500
         })
     }
