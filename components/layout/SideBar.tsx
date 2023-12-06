@@ -44,7 +44,9 @@ const SideBar = ({userApiLimit, isPro}: {userApiLimit: number, isPro: boolean}) 
                                                 "bg-gray-800": pathname === link.href
                                             })}>
                                             <div className="flex flex-row items-center space-x-4">
-                                                <link.icon className={cn("text-2xl", link.color)}/>
+                                                <link.icon className={cn("text-2xl", (
+                                                    link.color
+                                                ))}/>
                                                 <span className="text-gray-100">{link.name}</span>
                                             </div>
                                         </AccordionTrigger>
@@ -59,7 +61,9 @@ const SideBar = ({userApiLimit, isPro}: {userApiLimit: number, isPro: boolean}) 
                                                     "bg-gray-800": pathname === subLink.href
                                                 })}
                                             >
-                                                <subLink.icon className={cn("text-2xl", subLink.color)}/>
+                                                <subLink.icon className={cn("text-2xl", (
+                                                    subLink.color
+                                                ))}/>
                                                 <span className="text-gray-100 text-sm">{subLink.name}</span>
                                             </AccordionContent>
                                         })}
