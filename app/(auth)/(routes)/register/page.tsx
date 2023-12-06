@@ -16,6 +16,7 @@ import {useRouter} from "next/navigation";
 import {useState} from "react";
 import Link from "next/link";
 import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {toast} from "@/components/ui/use-toast";
 
 const Register = () => {
 
@@ -35,11 +36,24 @@ const Register = () => {
         try {
             setLoading(true)
             const res = await axios.post('/api/register', formData)
-            alert(res.data)
+            toast({
+                title: "Success",
+                description: res.data,
+                variant: "default",
+                className: "bg-green-400",
+                duration: 3000
+            })
 
             router.push("/login")
         } catch (error: any) {
-            alert(error.response.data)
+            const {response} = error
+            return toast({
+                title: "Error",
+                description: response.data,
+                variant: "destructive",
+                duration: 3000
+            })
+
         } finally {
             setLoading(false)
             form.reset()

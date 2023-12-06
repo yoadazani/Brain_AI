@@ -74,7 +74,12 @@ const Login = () => {
             })
 
         } catch (error: any) {
-            alert(error.response.data)
+            toast({
+                title: "Error",
+                description: error.response.data,
+                variant: "destructive",
+                duration: 3000
+            })
         }
     }
 
