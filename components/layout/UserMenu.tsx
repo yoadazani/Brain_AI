@@ -32,6 +32,8 @@ export const UserMenu = () => {
             router.push(path)
         } catch (error) {
             console.log(error)
+        } finally {
+            router.refresh()
         }
     }
 

@@ -8,10 +8,10 @@ import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import {useQueryString} from "@/hooks/useQueryString";
+import Link from "next/link";
 
 
 const ResetPassword = () => {
-    const router = useRouter()
     const {getQueryString, searchParams} = useQueryString()
 
     const isVerified = getQueryString("isVerified") === "1"
@@ -31,9 +31,11 @@ const ResetPassword = () => {
                 {isVerified && <ResetPassForm/>}
             </CardContent>
             <CardFooter>
-                <Button variant="outline" onClick={() => router.push("/login")} className="w-full">
-                    Cancel
-                </Button>
+                <Link href={"/login"}>
+                    <Button variant="outline" className="w-full">
+                        Cancel
+                    </Button>
+                </Link>
             </CardFooter>
         </Card>
     )

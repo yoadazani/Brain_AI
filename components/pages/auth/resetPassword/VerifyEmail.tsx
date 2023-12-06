@@ -11,13 +11,16 @@ import {VerificationFormProps} from "@/types/pages/auth/resetPassword/verificati
 import {useQueryString} from "@/hooks/useQueryString";
 import {confirmEmail} from "@/services/actions/authActions/confirmEmail";
 import {toast} from "@/components/ui/use-toast";
+import {useState} from "react";
+import {sleep} from "@/utils/sleep";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
 
 export const OTP = signal<string>("")
 
 export const VerifyEmail = ({setUserEmail}: VerificationFormProps) => {
 
     const {createQueryString} = useQueryString()
-
+    const [loading, setLoading] = useState(false)
     const form = useForm<z.infer<typeof verifyEmailSchema>>({
         resolver: zodResolver(verifyEmailSchema),
         defaultValues: {
@@ -26,6 +29,8 @@ export const VerifyEmail = ({setUserEmail}: VerificationFormProps) => {
     })
 
     const onSubmit = async (data: z.infer<typeof verifyEmailSchema>) => {
+        setLoading(true)
+        await sleep(1500)
         const confirmationOTP = await confirmEmail(data.email)
         if (confirmationOTP.status === "error") {
             toast({
@@ -39,6 +44,8 @@ export const VerifyEmail = ({setUserEmail}: VerificationFormProps) => {
             setUserEmail(data.email)
             createQueryString("emailConfirmed", "1")
         }
+
+        setLoading(false)
     }
 
     return <Form {...form}>
@@ -67,8 +74,9 @@ export const VerifyEmail = ({setUserEmail}: VerificationFormProps) => {
             <Button
                 type="submit"
                 variant="premium"
+                className="min-w-[150px]"
             >
-                Submit
+                {loading ? <ButtonLoader /> : "Submit"}
             </Button>
         </form>
     </Form>

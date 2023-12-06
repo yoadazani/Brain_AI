@@ -2,7 +2,7 @@
 
 import {useForm} from "react-hook-form";
 import {KeyRound, MailOpen} from "lucide-react"
-import {FaGoogle, FaGithub} from "react-icons/fa";
+import {FaGithub, FaGoogle} from "react-icons/fa";
 
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
@@ -13,13 +13,16 @@ import {loginSchema} from "@/constants/auth/loginConstant"
 import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
-import axios from "axios";
 import {signIn} from "next-auth/react";
 import {toast} from "@/components/ui/use-toast";
+import {useState} from "react";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
+import Link from "next/link";
 
 const Login = () => {
 
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -31,6 +34,7 @@ const Login = () => {
     const isLoading = form.formState.isSubmitting
     const onSubmit = async (data: z.infer<typeof loginSchema>) => {
         try {
+            setLoading(true)
             const signInResponse = await signIn("credentials", {
                 ...data,
                 redirect: false,
@@ -58,6 +62,7 @@ const Login = () => {
             alert(error.response.data)
         } finally {
             form.reset()
+            setLoading(false)
         }
 
     }
@@ -126,11 +131,26 @@ const Login = () => {
                     )}
                     disabled={isLoading}
                 />
-                <div className="flex space-x-2">
-                    <span className="font-mono">Forget your password?</span>
-                    <p className="cursor-pointer text-blue-700" onClick={() => router.push("/resetPassword")}>click here</p>
+                <div className="flex justify-between px-5">
+                    <div className="flex space-x-2 text-sm">
+                        <p className="font-normal">Forget your password?</p>
+                        <Link
+                            href={"/resetPassword"}
+                            className="text-blue-500"
+                        >
+                            click here
+                        </Link>
+                    </div>
+                    <div className="flex space-x-2 text-sm">
+                        <p className="font-normal">Don't have an account?</p>
+                        <Link
+                            href={"/register"}
+                            className="text-blue-500"
+                        >
+                            Sign-up
+                        </Link>
+                    </div>
                 </div>
-
                 <div className="flex w-full justify-center items-center space-x-1">
                     <div className="border border-dashed border-zinc-400 h-[0.2px] w-full"/>
                     <span className="font-mono font-bold text-zinc-500">OR</span>
@@ -144,8 +164,9 @@ const Login = () => {
                 <Button
                     type="submit"
                     variant="premium"
+                    className="min-w-[150px]"
                 >
-                    Login
+                    {loading ? <ButtonLoader/> : "Login"}
                 </Button>
             </form>
         </Form>

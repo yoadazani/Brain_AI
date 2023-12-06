@@ -47,14 +47,14 @@ export const sideBarLinks = [
                 name: "Account",
                 href: "/setting/account",
                 icon: User,
-                color: "text-slate-400",
+                color: "text-indigo-600",
                 subLinks: []
             },
             {
                 name: "Plans",
                 href: "/setting/plans",
                 icon: Zap,
-                color: "text-indigo-600",
+                color: "text-amber-400",
                 subLinks: []
             }
         ]

@@ -10,14 +10,16 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useQueryString} from "@/hooks/useQueryString";
 import {findUser} from "@/services/actions/userActions/findUser";
 import axios from "axios";
-import {encode} from "base-64";
 import {useRouter} from "next/navigation";
 import {toast} from "@/components/ui/use-toast";
+import {useState} from "react";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
 
 
 export const ResetPassForm = () => {
     const router = useRouter()
     const {getQueryString} = useQueryString()
+    const [loading, setLoading] = useState(false)
     const form = useForm<z.infer<typeof resetPasswordSchema>>({
         resolver: zodResolver(resetPasswordSchema),
         defaultValues: {
@@ -41,6 +43,7 @@ export const ResetPassForm = () => {
             return
         }
         try {
+            setLoading(true)
             await axios.put(`http://localhost:3000/api/users/${userInfo?.id}`, {
                 ...userInfo,
                 hashedPassword: values.newPassword
@@ -57,6 +60,7 @@ export const ResetPassForm = () => {
         } catch (error) {
             console.log(error)
         } finally {
+            setLoading(false)
             form.reset()
         }
 
@@ -115,8 +119,9 @@ export const ResetPassForm = () => {
                 <Button
                     type="submit"
                     variant="premium"
+                    className="min-w-[150px]"
                 >
-                    Reset now
+                    {loading ? <ButtonLoader /> : "Reset now"}
                 </Button>
             </form>
         </Form>

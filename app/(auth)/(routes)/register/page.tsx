@@ -13,10 +13,14 @@ import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
 import {useRouter} from "next/navigation";
+import {useState} from "react";
+import Link from "next/link";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
 
 const Register = () => {
 
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -29,6 +33,7 @@ const Register = () => {
     const isLoading = form.formState.isSubmitting
     const onSubmit = async (formData: z.infer<typeof registerSchema>) => {
         try {
+            setLoading(true)
             const res = await axios.post('/api/register', formData)
             alert(res.data)
 
@@ -36,6 +41,7 @@ const Register = () => {
         } catch (error: any) {
             alert(error.response.data)
         } finally {
+            setLoading(false)
             form.reset()
         }
     }
@@ -115,11 +121,23 @@ const Register = () => {
                     )}
                     disabled={isLoading}
                 />
+                <div className="flex space-x-2 text-sm">
+                    <p className="font-normal">
+                        Already have an account?{" "}
+                        <Link
+                            href={"/login"}
+                            className="text-blue-500"
+                        >
+                            Sign-in
+                        </Link>
+                    </p>
+                </div>
                 <Button
                     type="submit"
                     variant="premium"
+                    className="min-w-[150px]"
                 >
-                    Register
+                    {loading ? <ButtonLoader /> : "Register"}
                 </Button>
             </form>
         </Form>

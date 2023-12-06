@@ -39,7 +39,6 @@ export const authOptions = {
 
                 await connectToDatabase()
                 const user = await findUser(email)
-                console.log({user})
                 if (!user) {
                     throw new Error('User not found')
                 }
@@ -55,7 +54,6 @@ export const authOptions = {
     ],
     callbacks: {
         async jwt({token, trigger, session, user}: JwtPayload) {
-            console.log(session)
             if (trigger === "update" && session) {
                 token = {
                     ...token,

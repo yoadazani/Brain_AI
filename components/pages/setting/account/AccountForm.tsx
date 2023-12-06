@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSession} from "next-auth/react";
 import Loader from "@/components/app/Loader";
 import {useQueryString} from "@/hooks/useQueryString";
@@ -11,6 +11,8 @@ import {toast} from "@/components/ui/use-toast";
 import {useFirebaseStorage} from "@/hooks/useFirebaseStorage";
 import {updateUser} from "@/services/actions/userActions/updateUser";
 import {Camera, MailOpen, User} from "lucide-react";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {sleep} from "@/utils/sleep";
 
 export const AccountForm = () => {
 
@@ -20,10 +22,14 @@ export const AccountForm = () => {
 
     const isEditable = getQueryString("isEditable") === "1";
     const [userData, setUserData] = React.useState<z.infer<typeof accountSchema>>();
+    const [loading, setLoading] = useState(false);
 
 
     const handleSave = async () => {
+        setLoading(true);
+        await sleep(1500)
         if (!accountSchema.safeParse(userData).success) {
+            setLoading(false);
             return toast({
                 title: "Info",
                 description: "You need to provide the information to update your account.",
@@ -62,6 +68,7 @@ export const AccountForm = () => {
 
         setUserData(undefined)
         deleteQueryString("isEditable");
+        setLoading(false);
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,8 +119,13 @@ export const AccountForm = () => {
                 <Button
                     variant="premium"
                     onClick={handleSave}
+                    className="min-w-[150px]"
                 >
-                    Save Changes
+                    {
+                        loading
+                            ? <ButtonLoader/>
+                            : "Save Changes"
+                    }
                 </Button>
                 <Button
                     onClick={handleCancel}

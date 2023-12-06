@@ -2,24 +2,30 @@
 
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
-import {FC} from "react";
+import {FC, useState} from "react";
 import {PlanCardProps} from "@/types/pages/setting/plans/planCardProps";
 import {formatCurrency} from "@/utils/formatCurrency";
 import axios from "axios";
-import {checkUserSubscription} from "@/services/actions/userSubscription/checkUserSubscription";
 import {useRouter} from "next/navigation";
+import {sleep} from "@/utils/sleep";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
 
 export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, price, isPro}) => {
     const router = useRouter()
     const currentPrice = price ? formatCurrency(price) : null
+    const [loading, setLoading] = useState(false)
 
     const handleSubscription = async () => {
+        setLoading(true)
+        await sleep(1500)
         try {
             const response = await axios.get("/api/stripe")
 
             router.replace(response.data.url)
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -61,7 +67,14 @@ export const PlanCard: FC<PlanCardProps> = ({title, description, planOptions, pr
                             className="w-full"
                             onClick={handleSubscription}
                         >
-                            {isPro ? "Manage Subscription" : "Upgrade"}
+                            {
+                                loading
+                                    ? <ButtonLoader/>
+                                    : isPro
+                                        ? "Manage Subscription"
+                                        : "Upgrade"
+                            }
+
                         </Button>
                     </>
                 ) : (

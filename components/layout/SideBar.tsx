@@ -59,7 +59,7 @@ const SideBar = ({userApiLimit, isPro}: {userApiLimit: number, isPro: boolean}) 
                                                     "bg-gray-800": pathname === subLink.href
                                                 })}
                                             >
-                                                <subLink.icon className={cn("w-5 h-5", subLink.color)}/>
+                                                <subLink.icon className={cn("text-2xl", subLink.color)}/>
                                                 <span className="text-gray-100 text-sm">{subLink.name}</span>
                                             </AccordionContent>
                                         })}

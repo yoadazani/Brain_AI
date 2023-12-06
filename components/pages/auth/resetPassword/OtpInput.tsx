@@ -1,15 +1,18 @@
-import {KeyboardEvent, ChangeEvent, FC, FormEvent, useEffect, useRef, useState} from 'react';
+import {ChangeEvent, FC, FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {toast} from "@/components/ui/use-toast";
 import {useQueryString} from "@/hooks/useQueryString";
 import {OtpVerificationProps} from "@/types/pages/auth/resetPassword/OtpVerificationProps";
 import {OTP} from '@/components/pages/auth/resetPassword/VerifyEmail';
+import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {sleep} from "@/utils/sleep";
 
 let CURRENT_OTP_INDEX = 0
-export const OtpInput: FC<OtpVerificationProps> = ({ userEmail}) => {
+export const OtpInput: FC<OtpVerificationProps> = ({userEmail}) => {
     const {createQueryString} = useQueryString()
 
+    const [loading, setLoading] = useState(false)
     const [otp, setOtp] = useState<string[]>(new Array(6).fill(''))
     const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0)
 
@@ -30,6 +33,9 @@ export const OtpInput: FC<OtpVerificationProps> = ({ userEmail}) => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+
+        setLoading(true)
+        await sleep(1500)
         const otpInput = otp.join("")
         if (otpInput !== OTP.value) {
             toast({
@@ -53,6 +59,7 @@ export const OtpInput: FC<OtpVerificationProps> = ({ userEmail}) => {
         createQueryString("isVerified", "1")
 
         OTP.value = ""
+        setLoading(false)
     }
 
     const goToPrevInput = ({key}: KeyboardEvent<HTMLInputElement>, index: number) => {
@@ -85,7 +92,12 @@ export const OtpInput: FC<OtpVerificationProps> = ({ userEmail}) => {
                         />
                     ))}
                 </div>
-                <Button type="submit">Verify Account</Button>
+                <Button
+                    type="submit"
+                    className="min-w-[150px]"
+                >
+                    {loading ? <ButtonLoader/> : "Verify Account"}
+                </Button>
             </form>
         </div>
     )

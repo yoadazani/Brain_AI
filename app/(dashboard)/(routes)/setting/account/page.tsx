@@ -1,16 +1,25 @@
 "use client"
 
-import React from "react";
+import React, {useState} from "react";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {AccountForm} from "@/components/pages/setting/account/AccountForm";
 import {Button} from "@/components/ui/button";
 import {useQueryString} from "@/hooks/useQueryString";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {sleep} from "@/utils/sleep";
+import {useRouter} from "next/navigation";
 
 const Account = () => {
-    const {createQueryString, getQueryString} = useQueryString();
+    const router = useRouter();
 
-    const handleEdit = () => {
+    const {createQueryString, getQueryString} = useQueryString();
+    const [loading, setLoading] = useState(false);
+
+    const handleEdit = async () => {
+        setLoading(true);
+        await sleep(3000)
         createQueryString("isEditable", "1");
+        setLoading(false);
     }
 
     return (
@@ -22,7 +31,7 @@ const Account = () => {
             </CardHeader>
 
             <CardContent>
-                <AccountForm />
+                <AccountForm/>
             </CardContent>
 
             <CardFooter>
@@ -30,7 +39,14 @@ const Account = () => {
                     onClick={handleEdit}
                     disabled={getQueryString("isEditable") === "1"}
                     variant="premium"
-                >Update Account</Button>
+                    className="min-w-[150px]"
+                >
+                    {
+                        loading
+                            ? <ButtonLoader/>
+                            : "Update Account"
+                    }
+                </Button>
             </CardFooter>
         </Card>
     )
