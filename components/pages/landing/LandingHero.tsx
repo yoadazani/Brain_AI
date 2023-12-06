@@ -13,7 +13,7 @@ export const LandingHero = ({session}: { session: Session } ) => {
                 <h1>
                     The Best AI Tool For
                 </h1>
-                <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 p-1">
+                <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 p-1 text-3xl sm:text-4xl md:text-5xl">
                     <TypewriterComponent
                         options={{
                             strings: [
