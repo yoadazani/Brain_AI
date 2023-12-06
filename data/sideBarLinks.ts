@@ -38,7 +38,7 @@ export const sideBarLinks = [
         subLinks: undefined
     },
     {
-        name: "setting",
+        name: "Setting",
         href: "/setting",
         icon: Settings,
         color: "text-zinc-400",
