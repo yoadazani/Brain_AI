@@ -44,7 +44,7 @@ export const ResetPassForm = () => {
         }
         try {
             setLoading(true)
-            await axios.put(`http://localhost:3000/api/users/${userInfo?.id}`, {
+            await axios.put(`/api/users/${userInfo?.id}`, {
                 ...userInfo,
                 hashedPassword: values.newPassword
             })
