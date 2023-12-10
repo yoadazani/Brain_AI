@@ -1,19 +1,19 @@
-import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "../../../../brain/components/ui/form";
 import {MailOpen} from "lucide-react";
-import {Button} from "@/components/ui/button";
+import {Button} from "../../../../brain/components/ui/button";
 import {useForm} from "react-hook-form";
 
 import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {verifyEmailSchema} from "@/constants/auth/verifyEmailConstant";
+import {verifyEmailSchema} from "../../../../brain/constants/auth/verifyEmailConstant";
 import {signal} from "@preact/signals"
-import {VerificationFormProps} from "@/types/pages/auth/resetPassword/verificationFormProps";
-import {useQueryString} from "@/hooks/useQueryString";
-import {confirmEmail} from "@/services/actions/authActions/confirmEmail";
-import {toast} from "@/components/ui/use-toast";
+import {VerificationFormProps} from "../../../../brain/types/pages/auth/resetPassword/verificationFormProps";
+import {useQueryString} from "../../../../brain/hooks/useQueryString";
+import {confirmEmail} from "../../../../brain/services/actions/authActions/confirmEmail";
+import {toast} from "../../../../brain/components/ui/use-toast";
 import {useState} from "react";
-import {sleep} from "@/utils/sleep";
-import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {sleep} from "../../../../brain/utils/sleep";
+import {ButtonLoader} from "../../../../brain/components/app/ButtonLoader";
 
 export const OTP = signal<string>("")
 
