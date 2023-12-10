@@ -1,12 +1,12 @@
 import {ChangeEvent, FC, FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
-import {Input} from "../../../../brain/components/ui/input";
-import {Button} from "../../../../brain/components/ui/button";
-import {toast} from "../../../../brain/components/ui/use-toast";
-import {useQueryString} from "../../../../brain/hooks/useQueryString";
-import {OtpVerificationProps} from "../../../../brain/types/pages/auth/resetPassword/OtpVerificationProps";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
+import {toast} from "@/components/ui/use-toast";
+import {useQueryString} from "@/hooks/useQueryString";
+import {OtpVerificationProps} from "@/types/pages/auth/resetPassword/OtpVerificationProps";
 import {OTP} from './VerifyEmail';
-import {ButtonLoader} from "../../../../brain/components/app/ButtonLoader";
-import {sleep} from "../../../../brain/utils/sleep";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
+import {sleep} from "@/utils/sleep";
 
 let CURRENT_OTP_INDEX = 0
 export const OtpInput: FC<OtpVerificationProps> = ({userEmail}) => {

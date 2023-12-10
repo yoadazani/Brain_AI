@@ -6,7 +6,6 @@ import {VerifyEmail} from "@/components/pages/auth/resetPassword/VerifyEmail";
 import {ResetPassForm} from "@/components/pages/auth/resetPassword/ResetPassForm";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
-import {useRouter} from "next/navigation";
 import {useQueryString} from "@/hooks/useQueryString";
 import Link from "next/link";
 

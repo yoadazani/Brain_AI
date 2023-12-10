@@ -1,6 +1,6 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
 import {OtpInput} from './OtpInput';
-import {OtpVerificationProps} from "../../../../brain/types/pages/auth/resetPassword/OtpVerificationProps";
+import {OtpVerificationProps} from "@/types/pages/auth/resetPassword/OtpVerificationProps";
 
 
 

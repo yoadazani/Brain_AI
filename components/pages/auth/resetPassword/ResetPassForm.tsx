@@ -1,19 +1,19 @@
 import {useForm} from "react-hook-form";
-import {Form, FormControl, FormField, FormItem, FormMessage} from "../../../../brain/components/ui/form";
-import {Input} from "../../../../brain/components/ui/input";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
 
 import {KeyRound} from "lucide-react"
-import {Button} from "../../../../brain/components/ui/button";
+import {Button} from "@/components/ui/button";
 import * as z from "zod"
-import {resetPasswordSchema} from "../../../../brain/constants/auth/resetPasswordConstant";
+import {resetPasswordSchema} from "@/constants/auth/resetPasswordConstant";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useQueryString} from "../../../../brain/hooks/useQueryString";
-import {findUser} from "../../../../brain/services/actions/userActions/findUser";
+import {useQueryString} from "@/hooks/useQueryString";
+import {findUser} from "@/services/actions/userActions/findUser";
 import axios from "axios";
 import {useRouter} from "next/navigation";
-import {toast} from "../../../../brain/components/ui/use-toast";
+import {toast} from "@/components/ui/use-toast";
 import {useState} from "react";
-import {ButtonLoader} from "../../../../brain/components/app/ButtonLoader";
+import {ButtonLoader} from "@/components/app/ButtonLoader";
 
 
 export const ResetPassForm = () => {
@@ -44,7 +44,7 @@ export const ResetPassForm = () => {
         }
         try {
             setLoading(true)
-            await axios.put(`http://localhost:3000/api/users/${userInfo?.id}`, {
+            await axios.put(`/api/users/${userInfo?.id}`, {
                 ...userInfo,
                 hashedPassword: values.newPassword
             })

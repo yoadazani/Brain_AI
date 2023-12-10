@@ -32,7 +32,7 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
                 const {email, password} = credentials as { email: string, password: string }
-                console.log({email, password})
+
                 if (!email || !password) {
                     throw new Error('Please provide an email and password')
                 }
