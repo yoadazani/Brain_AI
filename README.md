@@ -18,5 +18,10 @@ IMAGE GENERATOR
 
 <img width="956" alt="Screenshot 2023-12-17 125741" src="https://github.com/yoadazani/Brain_AI/assets/149781408/fb233b1a-a769-472e-85ff-28dbbd2b6b11">
 
+UPGRADE PLAN
+
+<img width="979" alt="Screenshot 2023-12-17 130312" src="https://github.com/yoadazani/Brain_AI/assets/149781408/a0b5db75-0b7d-4f32-8d3e-4b551ebde8c9">
+
+
 
 link for app:  https://brain-ai-yoads-projects.vercel.app/
