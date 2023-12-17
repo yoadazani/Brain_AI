@@ -1,36 +1,22 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## BRAIN_AI
 
-First, run the development server:
+# A Buitifull AI Platform for code generator, conversation, image generator, audio transcription
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+LANDING PAGE:
 
-You can start editing the page by modifying `app/not-found.tsx`. The page auto-updates as you edit the file.
+<img width="945" alt="Screenshot 2023-12-17 125536" src="https://github.com/yoadazani/Brain_AI/assets/149781408/b28074ce-8d99-4878-b752-54ce4efc3a50">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+DASHBOARD PAGE:
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<img width="956" alt="Screenshot 2023-12-17 125621" src="https://github.com/yoadazani/Brain_AI/assets/149781408/7f9eaac9-3529-4293-82a6-3c914e91a69f">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+IMAGE GENERATOR
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<img width="956" alt="Screenshot 2023-12-17 125741" src="https://github.com/yoadazani/Brain_AI/assets/149781408/fb233b1a-a769-472e-85ff-28dbbd2b6b11">
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+link for app:  https://brain-ai-yoads-projects.vercel.app/
