@@ -24,4 +24,4 @@ UPGRADE PLAN
 
 
 
-link for app:  https://brain-ai-yoads-projects.vercel.app/
+link for app:  https://brain-ai-yoad-project.vercel.app/
