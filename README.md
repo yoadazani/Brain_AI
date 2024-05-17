@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## BRAIN_AI
 
-# A Buitifull AI Platform for code generator, conversation, image generator, audio transcription
+# A Beautiful AI Platform for code generator, conversation, image generator, audio transcription
 
 
 LANDING PAGE:
